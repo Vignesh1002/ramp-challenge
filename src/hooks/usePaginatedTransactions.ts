@@ -20,6 +20,8 @@ export function usePaginatedTransactions(): PaginatedTransactionsResult {
     setPaginatedTransactions((previousResponse) => {
       if (response === null || previousResponse === null) {
         return response
+      } else if(response && previousResponse) {
+        return { data: [...previousResponse.data, ...response.data], nextPage: response.nextPage}
       }
 
       return { data: response.data, nextPage: response.nextPage }
